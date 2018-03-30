@@ -2,3 +2,5 @@
 \.idea/
 
 app/yarn\.lock
+
+app/package-lock\.json

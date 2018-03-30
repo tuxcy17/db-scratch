@@ -19,10 +19,12 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
   },
+  "typeRoots": [
+    "./node_modules/@types"
+  ],
   "include": [
     "src/**/*",
     "test/**/*"
-
   ],
   "exclude": [
     "node_modules",

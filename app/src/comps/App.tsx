@@ -5,7 +5,7 @@ import {TriggerEdition} from './TriggerEdition';
 
 const logo = require('../styles/logo.svg');
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
     render() {
         return (
             <div className="App">
@@ -13,7 +13,7 @@ class App extends React.Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <TriggerEdition/>
+                <TriggerEdition defaultValue="TEST DEFAULT"/>
                 <TriggerList/>
             </div>
         );

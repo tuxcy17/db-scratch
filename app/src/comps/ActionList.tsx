@@ -1,9 +1,23 @@
 import * as React from "react";
 
-class ActionList extends React.Component {
+class ActionList extends React.Component<any, any> {
+    state: any = {
+        actions: [
+
+        ]
+    };
+
+    constructor(props: any) {
+        super(props);
+    }
+
     render() {
         return (
-            <div>ActionList</div>
+            <div>
+                <ul>
+
+                </ul>
+            </div>
         );
     }
 }

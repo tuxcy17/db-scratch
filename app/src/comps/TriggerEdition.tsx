@@ -1,6 +1,13 @@
 import * as React from "react";
 
-class TriggerEdition extends React.Component {
+class TriggerEdition extends React.Component<any, any> {
+    state = {
+        trigger: null
+    };
+
+    constructor(props: any) {
+        super(props);
+    }
 
     public clear () {
         alert('clear');
@@ -19,9 +26,9 @@ class TriggerEdition extends React.Component {
             <div>
             <div>
                 <textarea>
-                    Test
+
                 </textarea>
-                <span>Feedback</span>
+                <span>Feedback {this.props.defaultValue}</span>
             </div>
                 <div>
                     <button onClick={this.clear}>
