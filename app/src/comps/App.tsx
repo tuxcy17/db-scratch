@@ -1,9 +1,9 @@
 import * as React from 'react';
-import './styles/App.css';
+import '../styles/App.css';
 import {TriggerList} from './TriggerList';
 import {TriggerEdition} from './TriggerEdition';
 
-const logo = require('./styles/logo.svg');
+const logo = require('../styles/logo.svg');
 
 class App extends React.Component {
     render() {
