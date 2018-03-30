@@ -11,6 +11,7 @@ class TriggerEdition extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state.trigger = new Trigger('trigger1', 'DESCRIPTION');
+
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
         this.run = this.run.bind(this);
         this.clear = this.clear.bind(this);
