@@ -1,9 +1,10 @@
+import * as _ from "underscore";
 import * as React from "react";
 import {Trigger} from '../models/Trigger';
-import {eventService} from '../services/EventService';
+import {eventService, IObserver} from '../services/EventService';
 import {Event} from '../helper/Event';
 
-class TriggerList extends React.Component<any, any> {
+class TriggerList extends React.Component<any, any> implements IObserver {
     state: any = {
         triggers: []
     };
@@ -15,10 +16,23 @@ class TriggerList extends React.Component<any, any> {
         };
         this.add = this.add.bind(this);
         this.remove = this.remove.bind(this);
+        eventService.attach(this, Event.EVT_UPD_TRIGGER);
     }
 
     private getNextTriggerName(): string {
         return "Trigger" + (this.state.triggers.length + 1)
+    }
+
+    public update(events: Array<Event>, value: any): any {
+        let newTriggers: Trigger[] = [];
+        _.each(this.state.triggers, (trigger: Trigger) => {
+            if (trigger.id == value.id) {
+                newTriggers.push(value);
+            } else {
+                newTriggers.push(trigger);
+            }
+        });
+        this.setState({triggers: newTriggers});
     }
 
     public add () {

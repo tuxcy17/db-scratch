@@ -15,6 +15,7 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
         this.state.trigger = new Trigger('trigger1', 'DESCRIPTION');
 
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
+        this.onNameChange = this.onNameChange.bind(this);
         this.run = this.run.bind(this);
         this.clear = this.clear.bind(this);
         this.save = this.save.bind(this);
@@ -22,7 +23,7 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
     }
 
     public update(events: Array<Event>, value: any): any {
-        this.setState({trigger: value});
+        this.setState({trigger: value, feedback: ''});
         // return JSON.parse(JSON.stringify(this.states));
     }
 
@@ -39,19 +40,29 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
     }
 
     public save() {
+        let trigger: Trigger = this.state.trigger;
+        eventService.notifyImmediate(trigger, [Event.EVT_UPD_TRIGGER]);
         alert('save');
     };
 
     public onDescriptionChange(event: any) {
-        let trigger: Trigger = copy(this.state.trigger);
+        let trigger: Trigger = this.state.trigger;
         trigger.text = event.target.value;
+        this.setState({trigger: trigger});
+    }
+
+    public onNameChange(event: any) {
+        let trigger: Trigger = this.state.trigger;
+        trigger.name = event.target.value;
         this.setState({trigger: trigger});
     }
 
     render() {
         return (
             <div>
-                <div>{this.state.trigger.name}</div>
+                <div>
+                    <input type="text" value={this.state.trigger.name} onChange={this.onNameChange}/>
+                </div>
                 <div>
                 <textarea value={this.state.trigger.text} onChange={this.onDescriptionChange}>
 

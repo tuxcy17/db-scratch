@@ -1,6 +1,7 @@
 class Event {
     static allEvents: Event[] = [];
     public static readonly EVT_ADD_TRIGGER: Event = new Event("EVT_ADD_TRIGGER");
+    public static readonly EVT_UPD_TRIGGER: Event = new Event("EVT_UPD_TRIGGER");
     public static readonly EVT_DEL_TRIGGER: Event = new Event("EVT_DEL_TRIGGER");
 
     private name: string;
