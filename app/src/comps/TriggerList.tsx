@@ -25,6 +25,7 @@ class TriggerList extends React.Component<any, any> implements IObserver {
 
     public update(events: Array<Event>, value: any): any {
         let newTriggers: Trigger[] = [];
+
         _.each(this.state.triggers, (trigger: Trigger) => {
             if (trigger.id == value.id) {
                 newTriggers.push(value);
@@ -32,7 +33,12 @@ class TriggerList extends React.Component<any, any> implements IObserver {
                 newTriggers.push(trigger);
             }
         });
-        this.setState({triggers: newTriggers});
+
+        if (this.state.triggers.length == 0) {
+            this.setState({triggers: [value]});
+        } else {
+            this.setState({triggers: newTriggers});
+        }
     }
 
     public add () {
@@ -61,7 +67,7 @@ class TriggerList extends React.Component<any, any> implements IObserver {
         return (
             <div>
                 <div>
-                    <button onClick={this.add}>
+                    <button className="button" onClick={this.add}>
                         add
                     </button>
                 </div>

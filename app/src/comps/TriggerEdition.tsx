@@ -30,13 +30,13 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
 
     public clear() {
         let trigger: Trigger = copy(this.state.trigger);
-        trigger.text = "";
+        trigger.text = '';
         this.setState({trigger: trigger});
     }
 
     public run() {
-        alert("run: " + this.state.trigger.text);
-        this.setState({feedback: "something"});
+        alert('run: ' + this.state.trigger.text);
+        this.setState({feedback: 'something'});
     }
 
     public save() {
@@ -59,26 +59,29 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
 
     render() {
         return (
-            <div>
+            <div className="editor">
                 <div>
+                    <label>Name:</label>
                     <input type="text" value={this.state.trigger.name} onChange={this.onNameChange}/>
                 </div>
                 <div>
-                <textarea value={this.state.trigger.text} onChange={this.onDescriptionChange}>
-
-                </textarea>
-                    <span>Feedback: {this.state.feedback}</span>
-                </div>
-                <div>
-                    <button onClick={this.clear}>
-                        clear
-                    </button>
-                    <button onClick={this.run}>
-                        run
-                    </button>
-                    <button onClick={this.save}>
-                        save
-                    </button>
+                    <div>
+                        <label>Definition:</label>
+                        <textarea className="u-full-width" value={this.state.trigger.text}
+                                  onChange={this.onDescriptionChange}/>
+                        <span>Feedback: {this.state.feedback}</span>
+                    </div>
+                    <div>
+                        <button className="button" onClick={this.clear}>
+                            clear
+                        </button>
+                        <button className="button" onClick={this.run}>
+                            run
+                        </button>
+                        <button className="button" onClick={this.save}>
+                            save
+                        </button>
+                    </div>
                 </div>
             </div>
         );
