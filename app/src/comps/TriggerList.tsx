@@ -1,5 +1,7 @@
 import * as React from "react";
 import {Trigger} from '../models/Trigger';
+import {eventService} from '../services/EventService';
+import {Event} from '../helper/Event';
 
 class TriggerList extends React.Component<any, any> {
     state: any = {
@@ -29,14 +31,14 @@ class TriggerList extends React.Component<any, any> {
         alert('delete')
     }
 
-    public selectTrigger() {
-        alert('selectTrigger');
+    public selectTrigger(trigger: Trigger) {
+        eventService.notifyImmediate(trigger, [Event.EVT_ADD_TRIGGER]);
     }
 
     render() {
         const listTrigger = this.state.triggers.map((trigger: Trigger) =>
             <li key={trigger.id}>
-                <a onClick={this.selectTrigger}>
+                <a onClick={() => {this.selectTrigger(trigger)} }>
                     {trigger.name}
                 </a>
             </li>

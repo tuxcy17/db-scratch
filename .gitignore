@@ -4,3 +4,4 @@
 app/yarn\.lock
 
 app/package-lock\.json
+app/src/**/*.js

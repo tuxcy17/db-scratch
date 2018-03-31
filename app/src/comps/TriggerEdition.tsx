@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {Trigger} from '../models/Trigger';
 import {copy} from '../helper/Helper';
+import {eventService, IObserver} from '../services/EventService';
+import {Event} from '../helper/Event';
 
-class TriggerEdition extends React.Component<any, any> {
+class TriggerEdition extends React.Component<any, any> implements IObserver {
     state: any = {
         trigger: null,
         feedback: null
@@ -16,7 +18,14 @@ class TriggerEdition extends React.Component<any, any> {
         this.run = this.run.bind(this);
         this.clear = this.clear.bind(this);
         this.save = this.save.bind(this);
+        eventService.attach(this, Event.EVT_ADD_TRIGGER);
     }
+
+    public update(events: Array<Event>, value: any): any {
+        this.setState({trigger: value});
+        // return JSON.parse(JSON.stringify(this.states));
+    }
+
 
     public clear() {
         let trigger: Trigger = copy(this.state.trigger);
