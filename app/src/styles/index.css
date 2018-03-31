@@ -8,3 +8,6 @@ body {
   height: 20em;
 }
 
+.trigger-list ul {
+  list-style: none;
+}

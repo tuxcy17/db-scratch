@@ -47,8 +47,14 @@ class TriggerList extends React.Component<any, any> implements IObserver {
         this.setState({triggers: triggers});
     }
 
-    public remove (triggerToDelete: any) {
-        alert('delete')
+    public remove (triggerToDelete: Trigger) {
+        let newTriggers: Trigger[] = [];
+        _.each(this.state.triggers, (trigger: Trigger) => {
+            if (!(trigger.id == triggerToDelete.id)) {
+                newTriggers.push(trigger)
+            }
+        });
+        this.setState({triggers: newTriggers});
     }
 
     public selectTrigger(trigger: Trigger) {
@@ -61,11 +67,14 @@ class TriggerList extends React.Component<any, any> implements IObserver {
                 <a onClick={() => {this.selectTrigger(trigger)} }>
                     {trigger.name}
                 </a>
+                <a onClick={() => {this.remove(trigger)} }>
+                    X
+                </a>
             </li>
         );
 
         return (
-            <div>
+            <div className="trigger-list">
                 <div>
                     <button className="button" onClick={this.add}>
                         add
