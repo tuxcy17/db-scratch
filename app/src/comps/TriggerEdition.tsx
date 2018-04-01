@@ -3,6 +3,10 @@ import {Trigger} from '../models/Trigger';
 import {copy} from '../helper/Helper';
 import {eventService, IObserver} from '../services/EventService';
 import {Event} from '../helper/Event';
+import AceEditor from 'react-ace';
+
+import 'brace/mode/java';
+import 'brace/theme/github';
 
 class TriggerEdition extends React.Component<any, any> implements IObserver {
     state: any = {
@@ -20,12 +24,13 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
         this.clear = this.clear.bind(this);
         this.save = this.save.bind(this);
         eventService.attach(this, Event.EVT_ADD_TRIGGER);
+        eventService.attach(this, Event.EVT_SEL_TRIGGER);
     }
 
     public update(events: Array<Event>, value: any): any {
         this.setState({trigger: value, feedback: ''});
-        // return JSON.parse(JSON.stringify(this.states));
     }
+
 
 
     public clear() {
@@ -45,9 +50,10 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
         alert('save');
     };
 
-    public onDescriptionChange(event: any) {
+    public onDescriptionChange(newValue) {
+        debugger;
         let trigger: Trigger = this.state.trigger;
-        trigger.text = event.target.value;
+        trigger.text = newValue;
         this.setState({trigger: trigger});
     }
 
@@ -63,14 +69,6 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
                 <div>
                     <label>Name:</label>
                     <input type="text" value={this.state.trigger.name} onChange={this.onNameChange}/>
-                </div>
-                <div>
-                    <div>
-                        <label>Definition:</label>
-                        <textarea className="u-full-width" value={this.state.trigger.text}
-                                  onChange={this.onDescriptionChange}/>
-                        <span>Feedback: {this.state.feedback}</span>
-                    </div>
                     <div>
                         <button className="button" onClick={this.clear}>
                             clear
@@ -81,6 +79,20 @@ class TriggerEdition extends React.Component<any, any> implements IObserver {
                         <button className="button" onClick={this.save}>
                             save
                         </button>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <AceEditor
+                            mode="java"
+                            theme="github"
+                            onChange={this.onDescriptionChange}
+                            name={this.state.trigger.id}
+                            editorProps={{$blockScrolling: true}}
+                        />
+                        {/*<textarea className="u-full-width" value={this.state.trigger.text}*/}
+                                  {/*onChange={this.onDescriptionChange}/>*/}
+                        <span>Feedback: {this.state.feedback}</span>
                     </div>
                 </div>
             </div>

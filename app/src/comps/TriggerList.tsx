@@ -15,7 +15,7 @@ class TriggerList extends React.Component<any, any> implements IObserver {
             triggers: []
         };
         this.add = this.add.bind(this);
-        this.remove = this.remove.bind(this);
+        this.removeTrigger = this.removeTrigger.bind(this);
         eventService.attach(this, Event.EVT_UPD_TRIGGER);
     }
 
@@ -45,9 +45,10 @@ class TriggerList extends React.Component<any, any> implements IObserver {
         let newTrigger = new Trigger(this.getNextTriggerName(), "Hello world !");
         let triggers: Trigger[] = this.state.triggers.concat([newTrigger]);
         this.setState({triggers: triggers});
+        eventService.notifyImmediate(newTrigger, [Event.EVT_ADD_TRIGGER]);
     }
 
-    public remove (triggerToDelete: Trigger) {
+    public removeTrigger (triggerToDelete: Trigger) {
         let newTriggers: Trigger[] = [];
         _.each(this.state.triggers, (trigger: Trigger) => {
             if (!(trigger.id == triggerToDelete.id)) {
@@ -58,30 +59,30 @@ class TriggerList extends React.Component<any, any> implements IObserver {
     }
 
     public selectTrigger(trigger: Trigger) {
-        eventService.notifyImmediate(trigger, [Event.EVT_ADD_TRIGGER]);
+        eventService.notifyImmediate(trigger, [Event.EVT_SEL_TRIGGER]);
     }
 
     render() {
         const listTrigger = this.state.triggers.map((trigger: Trigger) =>
             <li key={trigger.id}>
-                <a onClick={() => {this.selectTrigger(trigger)} }>
+                <a onClick={() => {this.selectTrigger(trigger)} } className="trigger-name">
                     {trigger.name}
                 </a>
-                <a onClick={() => {this.remove(trigger)} }>
-                    X
-                </a>
+                <button onClick={() => {this.removeTrigger(trigger)} } className="delete-trigger">
+                    <i className="fas fa-times"/>
+                </button>
             </li>
         );
 
         return (
             <div className="trigger-list">
                 <div>
-                    <button className="button" onClick={this.add}>
-                        add
-                    </button>
-                </div>
-                <div>
                     <ul>
+                        <li>
+                            <button className="button" onClick={this.add}>
+                                add
+                            </button>
+                        </li>
                         {listTrigger}
                     </ul>
                 </div>
