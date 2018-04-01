@@ -2,7 +2,6 @@ import * as React from 'react';
 import '../styles/App.css';
 import {TriggerList} from './TriggerList';
 import {TriggerEdition} from './TriggerEdition';
-import {ActionList} from './ActionList';
 import {DatabaseList} from './DatabaseList';
 
 class App extends React.Component<any, any> {
@@ -16,12 +15,8 @@ class App extends React.Component<any, any> {
                 <div className="container">
                     <div className="row">
                         <div className="eight columns">
-                            <h2>Trigger editor</h2>
                             <div>
                                 <TriggerEdition/>
-                            </div>
-                            <div>
-                                <ActionList />
                             </div>
                         </div>
                         <div className="four columns">

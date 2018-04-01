@@ -14,9 +14,9 @@ class ActionList extends React.Component<any, any> {
     render() {
         const listActions = this.state.actions.map((action: Action, index: number) =>
             <li key={index}>
-                <a onClick={action.fn}>
+                <button onClick={action.fn}>
                     {action.name}
-                </a>
+                </button>
             </li>
         );
 
