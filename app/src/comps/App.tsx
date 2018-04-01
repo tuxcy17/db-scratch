@@ -3,6 +3,7 @@ import '../styles/App.css';
 import {TriggerList} from './TriggerList';
 import {TriggerEdition} from './TriggerEdition';
 import {ActionList} from './ActionList';
+import {DatabaseList} from './DatabaseList';
 
 class App extends React.Component<any, any> {
     render() {
@@ -10,6 +11,7 @@ class App extends React.Component<any, any> {
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">DB scratch</h1>
+                    <DatabaseList />
                 </header>
                 <div className="container">
                     <div className="row">
